@@ -1,4 +1,4 @@
-# AirliftCaseStudy - Gallery App
+# CaseStudy - Gallery App
 
 ## Introduction
 A gallery application that uses pixabay api to get images for your search query. It has two screen. First screen has a search field and fetches images as per search query and the other one has image details.
