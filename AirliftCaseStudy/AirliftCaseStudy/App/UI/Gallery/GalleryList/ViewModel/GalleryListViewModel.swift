@@ -24,6 +24,7 @@ protocol GalleryListViewModelOutput {
     var totalRows: Int { get }
     var heightForRow: Int { get }
     var title: String { get }
+    var isNoDataHidden: Observable<Bool> { get }
     var loader: Observable<Bool> { get }
     var reload: Observable<Void> { get }
     var error: Observable<String> { get }
@@ -33,20 +34,28 @@ protocol GalleryListViewModelProtocol: GalleryListViewModelInput, GalleryListVie
 
 final class GalleryListViewModel: GalleryListViewModelProtocol {
     
+    var isNoDataHidden: Observable<Bool> = Observable(true)
     var loader: Observable<Bool> = Observable(false)
     var reload: Observable<Void> = Observable(())
     var error: Observable<String> = Observable("")
     
     var totalRows: Int { gallery.count }
-    var heightForRow: Int { 70 }
+    var heightForRow: Int { 100 }
     var title: String { "Gallery" }
-    private var gallery = [Gallery]() { didSet { reload.value = () } }
+    
+    private var gallery = [Gallery]() {
+        didSet {
+            reload.value = ()
+            isNoDataHidden.value = !gallery.isEmpty
+        }
+    }
     
     private let actions: GalleryListViewModelAction
     private let useCase: GalleryUseCaseProtocol
     
     private var query: String = ""
     private var pageNumber: Int = 1
+    private var totalHits: Int = 0
     
     init(actions: GalleryListViewModelAction, useCase: GalleryUseCaseProtocol) {
         self.actions = actions
@@ -76,7 +85,7 @@ final class GalleryListViewModel: GalleryListViewModelProtocol {
     }
     
     func didScrollToEnd() {
-        if pageNumber <= 10 {
+        if self.shouldTryNextPage() {
             pageNumber += 1
             loader.value = true
             useCase.fetchGallery(searchKeyword: query,
@@ -97,18 +106,24 @@ final class GalleryListViewModel: GalleryListViewModelProtocol {
                                     views: views)
     }
     
-    private func onSuccessPagination(data: [Gallery]) {
+    private func onSuccessPagination(data: ([Gallery], Int)) {
         loader.value = false
-        gallery += data
+        gallery += data.0
+        totalHits = data.1
     }
     
-    private func onSuccess(data: [Gallery]) {
+    private func onSuccess(data: ([Gallery], Int)) {
         loader.value = false
-        gallery = data
+        gallery = data.0
+        totalHits = data.1
     }
     
     private func onFailure(errorMessage: String) {
         loader.value = false
         error.value = errorMessage
+    }
+    
+    private func shouldTryNextPage() -> Bool {
+        return ((totalHits/50) > pageNumber+1)
     }
 }

@@ -40,6 +40,8 @@
 		88D7628026DCE15B003F9F2C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D7627F26DCE15B003F9F2C /* NetworkManager.swift */; };
 		88D7628226DCE86F003F9F2C /* GalleryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D7628126DCE86F003F9F2C /* GalleryDataStore.swift */; };
 		88D7628526DD00FE003F9F2C /* GalleryListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D7628426DD00FE003F9F2C /* GalleryListCoordinator.swift */; };
+		88D7628926DD1424003F9F2C /* GalleryImageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D7628826DD1424003F9F2C /* GalleryImageDetailsViewController.swift */; };
+		88D7628C26DD170C003F9F2C /* GalleryImageDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D7628B26DD170C003F9F2C /* GalleryImageDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +81,8 @@
 		88D7627F26DCE15B003F9F2C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		88D7628126DCE86F003F9F2C /* GalleryDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDataStore.swift; sourceTree = "<group>"; };
 		88D7628426DD00FE003F9F2C /* GalleryListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryListCoordinator.swift; sourceTree = "<group>"; };
+		88D7628826DD1424003F9F2C /* GalleryImageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageDetailsViewController.swift; sourceTree = "<group>"; };
+		88D7628B26DD170C003F9F2C /* GalleryImageDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageDetailsViewModel.swift; sourceTree = "<group>"; };
 		999E84C8812A0BF942569F05 /* Pods_AirliftCaseStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirliftCaseStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -206,6 +210,7 @@
 		88D7622A26DCC5FA003F9F2C /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				88D7628626DD13EC003F9F2C /* GalleryImageDetails */,
 				88D7624426DCCF64003F9F2C /* GalleryList */,
 			);
 			path = Gallery;
@@ -342,6 +347,31 @@
 				88D7628426DD00FE003F9F2C /* GalleryListCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		88D7628626DD13EC003F9F2C /* GalleryImageDetails */ = {
+			isa = PBXGroup;
+			children = (
+				88D7628A26DD16FD003F9F2C /* ViewModel */,
+				88D7628726DD1405003F9F2C /* View */,
+			);
+			path = GalleryImageDetails;
+			sourceTree = "<group>";
+		};
+		88D7628726DD1405003F9F2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88D7628826DD1424003F9F2C /* GalleryImageDetailsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88D7628A26DD16FD003F9F2C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				88D7628B26DD170C003F9F2C /* GalleryImageDetailsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9DE516F98EC6D6824DF9D46A /* Pods */ = {
@@ -490,6 +520,7 @@
 				88D7622F26DCC79B003F9F2C /* AppDIContainer.swift in Sources */,
 				88D7628226DCE86F003F9F2C /* GalleryDataStore.swift in Sources */,
 				88D7623A26DCC8C4003F9F2C /* AppCoordinator.swift in Sources */,
+				88D7628926DD1424003F9F2C /* GalleryImageDetailsViewController.swift in Sources */,
 				88D7624826DCCF9D003F9F2C /* GalleryListViewController.swift in Sources */,
 				88D7623C26DCC905003F9F2C /* Storyboard+Extension.swift in Sources */,
 				88D7623826DCC879003F9F2C /* BaseCoordinator.swift in Sources */,
@@ -497,6 +528,7 @@
 				88D7627626DCE031003F9F2C /* APIResult.swift in Sources */,
 				88D7624C26DCD933003F9F2C /* GalleryListViewModel.swift in Sources */,
 				88D7626226DCDDB1003F9F2C /* GalleryDataModel.swift in Sources */,
+				88D7628C26DD170C003F9F2C /* GalleryImageDetailsViewModel.swift in Sources */,
 				88D7623126DCC7A5003F9F2C /* GalleryDIContainer.swift in Sources */,
 				88D7625026DCD98C003F9F2C /* GalleryListCollectionViewCell.swift in Sources */,
 				88D7625A26DCDC58003F9F2C /* GalleryUseCase.swift in Sources */,
@@ -652,12 +684,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LH9PNG4CM6;
 				INFOPLIST_FILE = AirliftCaseStudy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.myworkspace.AirliftCaseStudy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myworkspace.CaseStudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -671,12 +704,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LH9PNG4CM6;
 				INFOPLIST_FILE = AirliftCaseStudy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.myworkspace.AirliftCaseStudy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myworkspace.CaseStudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -9,7 +9,7 @@ import UIKit
 
 protocol GalleryListCoordinatorDependencies {
     func makeGalleryListViewController(actions: GalleryListViewModelAction) -> GalleryListViewController
-//    func makeRecipeDetailViewController(recipe: Gallery) -> GalleryDetailViewController
+    func makeGalleryImageDetailViewController(gallery: Gallery) -> GalleryImageDetailsViewController
 }
 
 final class GalleryListCoordinator: BaseCoordinator {
@@ -17,7 +17,7 @@ final class GalleryListCoordinator: BaseCoordinator {
     let dependencies: GalleryListCoordinatorDependencies
     private weak var navigation: UINavigationController?
     
-    private weak var recipeListVC: GalleryListViewController?
+    private weak var galleryListVC: GalleryListViewController?
     
     init(dependencies: GalleryListCoordinatorDependencies, navigation: AppNavigation) {
         self.dependencies = dependencies
@@ -28,11 +28,11 @@ final class GalleryListCoordinator: BaseCoordinator {
         let actions = GalleryListViewModelAction(showDetails: showDetailsViewController)
         let vc = dependencies.makeGalleryListViewController(actions: actions)
         navigation?.pushViewController(vc, animated: true)
-        recipeListVC = vc
+        galleryListVC = vc
     }
     
-    private func showDetailsViewController(recipe: Gallery) {
-//        let detailVC = dependencies.makeRecipeDetailViewController(recipe: recipe)
-//        navigation?.pushViewController(detailVC, animated: true)
+    private func showDetailsViewController(gallery: Gallery) {
+        let detailVC = dependencies.makeGalleryImageDetailViewController(gallery: gallery)
+        navigation?.pushViewController(detailVC, animated: true)
     }
 }

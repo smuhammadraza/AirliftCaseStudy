@@ -12,7 +12,7 @@ final class GalleryDIContainer {
 }
 
 extension GalleryDIContainer: GalleryListCoordinatorDependencies {
-    // MARK:- RecipeList
+    // MARK:- GalleryList
     func makeGalleryFlowCoodinator(navigation: AppNavigation) -> GalleryListCoordinator {
         GalleryListCoordinator(dependencies: self, navigation: navigation)
     }
@@ -25,21 +25,21 @@ extension GalleryDIContainer: GalleryListCoordinatorDependencies {
 
     func makeGalleryListViewController(actions: GalleryListViewModelAction) -> GalleryListViewController {
         let storyboard = UIStoryboard(storyboard: .main)
-        let recipeListVC: GalleryListViewController = storyboard.initialViewController()
-        recipeListVC.viewModel = makeGalleryListViewModel(actions: actions)
-        return recipeListVC
+        let galleryListVC: GalleryListViewController = storyboard.initialViewController()
+        galleryListVC.viewModel = makeGalleryListViewModel(actions: actions)
+        return galleryListVC
     }
 
-    // MARK:- Recipe Details
+    // MARK:- Gallery Details
 
-//    func makeRecipeDetailViewModel(recipe: Gallery) -> GalleryDetailViewModel {
-//        RecipeDetailViewModel(recipe: recipe)
-//    }
+    func makeGalleryDetailViewModel(gallery: Gallery) -> GalleryImageDetailViewModel {
+        GalleryImageDetailViewModel(gallery: gallery)
+    }
 
-//    func makeRecipeDetailViewController(recipe: Gallery) -> GalleryDetailViewController {
-//        let storyboard = UIStoryboard(storyboard: .main)
-//        let detailVC: GalleryDetailViewController = storyboard.instantiateViewController()
-//        detailVC.viewModel = makeRecipeDetailViewModel(recipe: recipe)
-//        return detailVC
-//    }
+    func makeGalleryImageDetailViewController(gallery: Gallery) -> GalleryImageDetailsViewController {
+        let storyboard = UIStoryboard(storyboard: .main)
+        let detailVC: GalleryImageDetailsViewController = storyboard.instantiateViewController()
+        detailVC.viewModel = makeGalleryDetailViewModel(gallery: gallery)
+        return detailVC
+    }
 }

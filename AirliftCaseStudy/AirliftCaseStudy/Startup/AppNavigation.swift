@@ -16,7 +16,7 @@ class AppNavigation: UINavigationController {
 
     private func setupUI() {
         navigationBar.barTintColor = .black
-        navigationBar.tintColor = .black
+        navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
         navigationBar.titleTextAttributes =
             [NSAttributedString.Key.foregroundColor: UIColor.white,

@@ -12,6 +12,7 @@ class GalleryListViewController: UIViewController, AlertsPresentable {
     // MARK: - OUTLETS
     @IBOutlet weak var viewSearchContainer: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var labelNoData: UILabel!
     
     // MARK: - VARIABLES
     var viewModel: GalleryListViewModel!
@@ -49,6 +50,7 @@ class GalleryListViewController: UIViewController, AlertsPresentable {
         viewModel.error.observe(on: self) { [weak self] in self?.showAlert(with: "Error", and: $0) }
         viewModel.reload.observe(on: self) { [weak self] _ in self?.collectionView.reloadData() }
         viewModel.loader.observe(on: self) { ($0) ? LoadingView.show() : LoadingView.hide() }
+        viewModel.isNoDataHidden.observe(on: self) { [weak self] in self?.labelNoData.isHidden = $0 }
     }
 }
 
@@ -60,7 +62,7 @@ extension GalleryListViewController {
         searchBar.delegate = self
 //        searchBar.placeholder = viewModel.searchBarPlaceholder
         searchBar.translatesAutoresizingMaskIntoConstraints = true
-        searchBar.barStyle = .black
+        searchBar.barStyle = .default
         searchBar.frame = viewSearchContainer.bounds
         searchBar.autoresizingMask = [.flexibleWidth]
         viewSearchContainer.addSubview(searchBar)
@@ -88,7 +90,7 @@ extension GalleryListViewController: UISearchBarDelegate {
 extension GalleryListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        viewModel.didTapOnRow(at: indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -120,6 +122,6 @@ extension GalleryListViewController: UICollectionViewDataSource {
 extension GalleryListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: collectionView.frame.width/2, height: 100.0)
+        return CGSize.init(width: Int(collectionView.frame.width)/2, height: viewModel.heightForRow)
     }
 }
